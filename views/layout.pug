@@ -1,0 +1,45 @@
+// layout.pug
+html
+  head
+    title SweatFit
+    link(rel='stylesheet', href='/stylesheets/header.css')
+    link(rel='stylesheet', href='/stylesheets/dashboard.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet" href="/stylesheets/login_register_modal.css")
+    link(rel='stylesheet', href='/stylesheets/memberships.css')
+    link(rel='stylesheet', href='/stylesheets/programs.css')
+    link(rel='stylesheet', href='/stylesheets/trainers.css')
+    link(rel='stylesheet', href='/stylesheets/my-trainings.css')
+    link(rel='stylesheet', href='/stylesheets/sing-up-training.css')
+    link(rel='stylesheet', href='/stylesheets/schedule.css')
+    link(rel='stylesheet', href='/stylesheets/adminpanel.css')
+    link(rel='stylesheet', href='/stylesheets/adminpanel-create.css')
+    link(rel='stylesheet', href='/stylesheets/adminpanel-edit.css')
+    script(src="/javascripts/dashboard.js")
+    script(src="/javascripts/programs.js")
+    script(src="/javascripts/team.js")
+    script(src="/javascripts/adminpanel.js")
+    link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet")
+
+  body
+    header
+      div
+        img(src='/images/SWEATFIT.jpg', alt='SweatFit Logo', class='header-logo')
+      nav
+        ul
+          li: a(href="/") Головна
+          li: a(href="/programs") Програми
+          li: a(href="/memberships") Ціни
+          li: a(href="/trainers") Тренери
+          li: a(href="/schedule") Розклад
+          if isAuthenticated
+            li: a(href="/dashboard") Особистий кабінет
+            if isAdmin
+              li: a(href="/adminpanel") Адмінпанель
+            button(onclick="window.location.href='/users/logout'") Вийти
+          else
+            button(onclick="openModal()") Вхід/Реєстрація
+
+    block content
+    include partials/modal
+    script(src="/javascripts/modal.js")

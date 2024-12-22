@@ -1,0 +1,53 @@
+extends ../layout
+
+block content
+    .dashboard-container
+        .sidebar
+            ul
+                li: a(href="/dashboard", class=(currentPage === 'dashboard' ? 'active' : ''))
+                    i(class="fas fa-user") Особисті дані
+                li: a(href="/dashboard/sing-up-training", class=(currentPage === 'sing-up-training' ? 'active' : ''))
+                    i(class="fas fa-dumbbell") Запис на тренування
+                li: a(href="/dashboard/my-trainings", class=(currentPage === 'my-trainings' ? 'active' : ''))
+                    i(class="fas fa-calendar-check") Мої тренування
+
+        .main-content-sing-up-training
+            h1 ЗАПИС НА ТРЕНУВАННЯ
+            if membership
+                .form-select
+                    .form-select-program-date
+                        form(action="/dashboard/sing-up-training", method="get")
+                            .form-group-program-date
+                                label(for="program_id") Виберіть вид тренування:
+                                select(name="program_id" required)
+                                    option(value="") Виберіть...
+                                    each program in programs
+                                        option(value=program.id_program, selected=program.id_program == program_id) #{program.name}
+                            .form-group-program-date
+                                label(for="date") Виберіть дату тренування:
+                                input(type="date", name="date", value=date required)
+                            .form-button
+                                button.btn-search-training(type="submit") Пошук
+
+                    .form-select-result
+                        if trainings.length > 0
+                            h2 Знайдені вільні місця
+                            p Виберіть тренера та вільне віконечко:
+                            each group in trainingsGroupedByTrainer
+                                .group-trainings
+                                    h3 #{group.trainer_name}
+                                    .time-buttons
+                                        each training in group.trainings
+                                            button.btn-time(type="button", data-id=training.id_training) #{training.formattedTime}
+
+                            form#registerForm(method="POST" action="/dashboard/sing-up-training/register-training")
+                                input(type="hidden", name="training_id", id="training_id")
+                                .form-button
+                                    button.btn-submit(type="submit") Записатись
+
+                        else if program_id || date
+                            h3 Тренувань не знайдено
+            else
+                .no-membership-message
+                    h2 Ви не маєте активного абонемента
+                    p Щоб записатись на тренування, перейдіть в особистий кабінет та придбайте абонемент :)

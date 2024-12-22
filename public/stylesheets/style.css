@@ -1,0 +1,50 @@
+:root {
+  --dark-gray: #343a40;
+  --white: #ffffff;
+  --pink: #ff006e;
+  --light-pink: #ffafcc;
+}
+body {
+  font-family: 'Helvetica', serif;
+  margin: 0;
+}
+
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+  height: 60%;
+  background: linear-gradient(
+          rgba(0, 0, 0, 0.6),
+          rgba(0, 0, 0, 0.6)
+  ), url('/images/gym-background.jpg') center/cover no-repeat;
+
+}
+
+.hero h1 {
+  font-family: 'Montserrat';
+  color: var(--white);
+  font-size: 48px;
+  font-weight: bold;
+
+}
+
+.hero p {
+  font-size: 24px;
+  margin-top: 40px;
+  color: var(--white);
+}
+
+.hero p span{
+  font-weight: bold;
+  color: var(--pink);
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  height: 62px;
+  padding: 20px;
+  background-color: var(--dark-gray);
+  color: var(--white);
+}
+
+

@@ -1,0 +1,68 @@
+extends ../../layout
+
+block content
+    .edit-container
+        h1 Редагування тренера
+        a(href="/adminpanel/adminpanel-trainers") Назад
+        form(action=`/trainers/edit/${trainer.id_trainer}` method="POST" id="edit-trainer-form")
+            .form-group-edit
+                label(for="full_name") ПІБ
+                input(type="text" id="full_name" name="full_name" value=trainer.full_name required)
+
+            .form-group-edit
+                label(for="date_of_birth") Дата народження
+                input(type="date" id="date_of_birth" name="date_of_birth" value=trainer.date_of_birth required)
+
+            .form-group-edit
+                label(for="phone") Телефон
+                input(type="text" id="phone" name="phone" value=trainer.phone required)
+
+            .form-group-edit
+                label(for="date_of_employment") Дата працевлаштування
+                input(type="date" id="date_of_employment" name="date_of_employment" value=trainer.date_of_employment required)
+
+            .form-group-edit
+                label(for="program_id") Програма
+                select(id="program_id" name="program_id" required)
+                    each program in programs
+                        option(value=program.id_program, selected=program.id_program == trainer.program_id)= program.name
+
+            .form-group-edit
+                label(for="description") Опис
+                input(type="text" id="description" name="description" value=trainer.description required)
+
+            button(type="submit") Зберегти зміни
+
+
+    script.
+        document.getElementById('edit-trainer-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            const requestData = {};
+            formData.forEach((value, key) => {
+                requestData[key] = value;
+            });
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData),
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert('Тренера успішно оновлено!');
+                    window.location.href = '/adminpanel/adminpanel-trainers'; // Повернення до списку тренувань
+                } else {
+                    alert(`Помилка: ${result.message}`);
+                }
+            } catch (error) {
+                alert('Сталася помилка при з’єднанні з сервером.');
+                console.error('Error:', error);
+            }
+        });

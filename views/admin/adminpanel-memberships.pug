@@ -1,0 +1,36 @@
+extends ../layout
+
+block content
+    .adminpanel-container
+        .admin-sidebar
+            ul
+                li: a(href="/adminpanel/") Головна
+                li: a(href="/adminpanel/adminpanel-trainings") Тренування
+                li: a(href="/adminpanel/adminpanel-users") Користувачі
+                li: a(href="/adminpanel/adminpanel-trainers") Тренери
+                li: a(href="/adminpanel/adminpanel-programs") Програми
+                li: a(href="/adminpanel/adminpanel-memberships") Абонементи
+        .adminpanel-content
+            h1 Список абонементів
+            a(href="/memberships/create" class="btn btn-primary") + Додати абонемент
+            table.table
+                thead
+                    tr
+                        th ID
+                        th Назва
+                        th Опис
+                        th Ціна
+                        th Тривалість
+                        th Дії
+                tbody
+                    each membership in memberships
+                        tr
+                            td= membership.id_membership
+                            td= membership.name
+                            td= membership.description
+                            td= membership.price
+                            td= membership.duration
+                            td
+                                .actions
+                                    a(href=`/memberships/edit/${membership.id_membership}`) Редагувати
+                                    button(data-id=membership.id_membership class="delete-membership-btn") Видалити

@@ -1,0 +1,84 @@
+
+/* Контейнер для форми створення тренування */
+.create-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Заголовок */
+.create-container h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Кнопка назад */
+.create-container a {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #3498db;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.create-container a:hover {
+    color: #2980b9;
+}
+
+/* Група форми */
+.form-group-create {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-group-create label {
+    font-size: 16px;
+    color: #555;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Поля вводу та випадаючі списки однакового розміру */
+.create-container input,
+.create-container select{
+    width: 100%;
+    max-width: 620px; /* Встановлюємо максимальну ширину */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    box-sizing: border-box; /* Ураховуємо padding у розмір елементу */
+}
+
+.create-container input[type="date"], input[type="time"] {
+    cursor: pointer;
+}
+
+
+.create-container select:focus, input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Кнопка "Створити" */
+.create-container button[type="submit"] {
+    background-color: #3498db;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.create-container button[type="submit"]:hover {
+    background-color: #2980b9;
+}

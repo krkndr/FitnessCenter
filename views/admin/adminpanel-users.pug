@@ -1,0 +1,44 @@
+extends ../layout
+
+block content
+    .adminpanel-container
+        .admin-sidebar
+            ul
+                li: a(href="/adminpanel/") Головна
+                li: a(href="/adminpanel/adminpanel-trainings") Тренування
+                li: a(href="/adminpanel/adminpanel-users") Користувачі
+                li: a(href="/adminpanel/adminpanel-trainers") Тренери
+                li: a(href="/adminpanel/adminpanel-programs") Програми
+                li: a(href="/adminpanel/adminpanel-memberships") Абонементи
+
+        .adminpanel-content
+            h1 Користувачі
+            a(href="/users/create" class="btn btn-primary") + Додати користувача
+
+            table
+                thead
+                    tr
+                        th ID
+                        th Ім'я
+                        th Email
+                        th Логін
+                        th Телефон
+                        th Роль
+                        th Абонемент
+                        th Дата закінчення
+                        th Дії
+                tbody
+                    each user in users
+                        tr
+                            td= user.id_user
+                            td= user.name
+                            td= user.email
+                            td= user.login
+                            td= user.phone
+                            td= user.role_name
+                            td= user.membership_name || 'Немає'
+                            td= user.end_date || 'Н/Д'
+                            td
+                                .actions
+                                    a(href=`/users/edit/${user.id_user}`) Редагувати
+                                    button(data-id=user.id_user class="delete-user-btn") Видалити

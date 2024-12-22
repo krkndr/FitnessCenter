@@ -1,0 +1,68 @@
+extends ../../layout
+
+block content
+    .create-container
+        h1 Додати нового тренера
+        a(href="/adminpanel/adminpanel-trainers") Назад
+        form(action="/trainers/create" method="POST" id="create-trainer-form")
+            .form-group-create
+                label(for="full_name") Повне ім'я
+                input(type="text" id="full_name" name="full_name" required)
+
+            .form-group-create
+                label(for="date_of_birth") Дата народження
+                input(type="date" id="date_of_birth" name="date_of_birth" required)
+
+            .form-group-create
+                label(for="phone") Телефон
+                input(type="text" id="phone" name="phone" required)
+
+            .form-group-create
+                label(for="date_of_employment") Дата прийняття на роботу
+                input(type="date" id="date_of_employment" name="date_of_employment" required)
+
+            .form-group-create
+                label(for="program_id") Програма
+                select(id="program_id" name="program_id" required)
+                    each program in programs
+                        option(value=program.id_program)= program.name
+
+            .form-group-create
+                label(for="description") Телефон
+                input(type="text" id="description" name="description" required)
+
+            button(type="submit") Додати тренера
+
+    script.
+        document.getElementById('create-trainer-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            const requestData = {};
+            formData.forEach((value, key) => {
+                requestData[key] = value;
+            });
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData),
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert('Тренера успішно додано!');
+                    window.location.href = '/adminpanel/adminpanel-trainers'; // Оновлюємо сторінку після успішного створення
+                } else {
+                    alert(`Помилка: ${result.message}`); // Виводимо текст помилки
+                }
+            } catch (error) {
+                alert('Сталася помилка при з’єднанні з сервером.');
+                console.error('Error:', error);
+            }
+        });
+

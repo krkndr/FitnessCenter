@@ -1,0 +1,71 @@
+extends ../../layout
+
+block content
+    .create-container
+        h1 Створити нового користувача
+        a(href="/adminpanel/adminpanel-users") Назад
+        form(action="/users/create" method="POST" id="create-user-form")
+            .form-group-create
+                label(for="name_surname") Ім'я та прізвище:
+                input#name_surname(type="text" name="name_surname" placeholder="Введіть ім'я та прізвище" required)
+
+            .form-group-create
+                label(for="login") Логін:
+                input#login(type="text" name="login" placeholder="Введіть логін" required)
+
+            .form-group-create
+                label(for="email") Email:
+                input#email(type="email" name="email" placeholder="Введіть email" required)
+
+            .form-group-create
+                label(for="phone") Телефон:
+                input#phone(type="text" name="phone" placeholder="Введіть номер телефону" required)
+
+            .form-group-create
+                label(for="password") Пароль:
+                input#password(type="password" name="password" placeholder="Введіть пароль" required)
+
+            .form-group-create
+                label(for="password") Пароль:
+                input#confirmPassword(type="password" name="confirmPassword" placeholder="Повторіть пароль" required)
+
+            .form-group-create
+                label(for="role_id") Роль:
+                select#role_id(name="role_id" required)
+                    each role in roles
+                        option(value=role.id_role)= role.name
+
+            button(type="submit") Створити
+
+    script.
+        document.getElementById('create-user-form').addEventListener('submit', async (event) => {
+            event.preventDefault(); // Запобігаємо стандартному відправленню форми
+            const form = event.target;
+            const formData = new FormData(form);
+
+            const requestData = {};
+            formData.forEach((value, key) => {
+                requestData[key] = value;
+            });
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData),
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert('Користувача успішно створено!');
+                    window.location.href = '/adminpanel/adminpanel-users'; // Переадресація після успішного створення
+                } else {
+                    alert(`Помилка: ${result.message}`); // Виводимо текст помилки
+                }
+            } catch (error) {
+                alert('Сталася помилка при з’єднанні з сервером.');
+                console.error('Error:', error);
+            }
+        });

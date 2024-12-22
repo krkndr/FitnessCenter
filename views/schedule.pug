@@ -1,0 +1,44 @@
+extends layout
+
+block content
+    .main-content-schedule
+        h1 РОЗКЛАД
+        p УВАГА! В розкладі відображено виключно групові заняття
+        .schedule-navigation
+            if canGoBack
+                a(href='/schedule?direction=previous') ←
+            h2 #{startOfWeekFormatted} - #{endOfWeekFormatted}
+            if canGoNext
+                a(href='/schedule?direction=next') →
+
+        if weekDates && weekDates.length > 0
+            .table-schedule-container
+                table
+                    thead
+                        tr
+                            th Година
+                            each weekDay in weekDates
+                                th(class=(weekDay.isToday ? 'today' : (weekDay.isPast ? 'past' : '')))= weekDay.date
+
+                    tbody
+                        each hourRow, index in scheduleTable
+                            tr
+                                td(class='td-hour')= `${10 + index}:00`
+                                each trainingsAtDay, colIndex in hourRow
+                                    td(class=(weekDates[colIndex].isToday ? 'today-column' : (weekDates[colIndex].isPast ? 'past-column' : '')))
+                                        if trainingsAtDay.length > 0
+                                            each training in trainingsAtDay
+                                                p
+                                                    strong= training.program_name
+                                                    br
+                                                    = training.trainer_name
+                                                    br
+                                                    = training.formattedTime
+                                        else
+
+        else
+            p Не вдалося отримати розклад. Спробуйте пізніше.
+
+    footer
+        p © 2024 SweatFit. Всі права захищені.
+        p Designed by ODARKA-STUDIO

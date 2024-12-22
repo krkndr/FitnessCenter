@@ -1,0 +1,138 @@
+.main-content-my-training{
+    background: url('/images/my-trainings-background.jpg') center/cover no-repeat;
+    background-attachment: fixed; /* Фіксація фону */
+    width: 80%;
+    padding: 5px;
+}
+
+.main-content-my-training h1, h2, h3{
+    text-align: center; /* Центрування тексту */
+    font-family: 'Montserrat';
+    color: var(--white);
+    font-weight: bold;
+}
+
+.main-content-my-training h1{
+    margin: 20px;
+}
+
+.main-content-my-training h2 {
+    position: relative; /* Встановлюємо позицію для `::before` та `::after` */
+}
+
+.main-content-my-training h2::before,
+.main-content-my-training h2::after {
+    content: ''; /* Додаємо порожній контент для псевдоелемента */
+    display: block;
+    width: 100%; /* Ширина лінії (можна змінювати за потреби) */
+    height: 2px; /* Товщина лінії */
+    background-color: var(--pink); /* Колір лінії */
+    margin: 10px auto; /* Відступи і центрування лінії */
+}
+
+.main-content-my-training h2::before {
+    margin-bottom: 5px; /* Відступ перед заголовком */
+}
+
+.main-content-my-training h2::after {
+    margin-top: 5px; /* Відступ після заголовка */
+}
+
+/* Стилі для карток тренувань */
+.trainings-container {
+    margin-top: 20px;
+    padding: 40px;
+}
+
+.training-card {
+    display: flex;
+    justify-content: space-between; /* Рівномірно розподіляємо елементи */
+    align-items: center; /* Вертикальне вирівнювання елементів по центру */
+    height: 50px; /* Висота картки */
+    padding: 10px 15px; /* Відступи всередині картки */
+    border-radius: 8px; /* Закруглення кутів */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: rgba(255, 236, 247, 0.5); /* Напівпрозорий фон */
+    border: 2px solid transparent; /* Початковий бордер */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тінь */
+}
+
+.training-card.registered {
+    background-color: rgba(255, 236, 247, 0.5); /* Напівпрозорий рожевий фон */
+    border-color: #ffb6d1; /* Рожевий бордер */
+    box-shadow: 0 4px 8px rgba(255, 182, 209, 0.7); /* Рожевий тінь */
+}
+
+.training-card.registered p {
+    color: black;
+    font-size: 20px;
+}
+
+.training-card.registered span {
+    color: black;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.training-card.registered:hover {
+    background-color: rgba(255, 182, 209, 0.8); /* Менш прозорий рожевий при наведенні */
+    opacity: 1; /* Повністю непрозора */
+    transform: scale(1.05); /* Анімація при наведенні */
+}
+
+/* Стиль для відвіданих тренувань (сірі) */
+.training-card.attended {
+    background-color: rgba(241, 241, 241, 0.5); /* Напівпрозорий сірий фон */
+    border-color: #cccccc; /* Сірий бордер */
+    box-shadow: 0 4px 8px rgba(204, 204, 204, 0.7); /* Сірий тінь */
+}
+
+.training-card.attended p {
+    color: black;
+    font-size: 20px;
+}
+
+.training-card.attended span {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.training-card.attended:hover {
+    background-color: rgba(204, 204, 204, 0.8); /* Менш прозорий сірий при наведенні */
+    opacity: 1; /* Повністю непрозора */
+    transform: scale(1.05); /* Анімація при наведенні */
+}
+
+/* Вирівнювання елементів всередині картки */
+.training-card p {
+    margin: 0; /* Забираємо стандартні відступи */
+    padding: 0; /* Забираємо стандартні відступи */
+    font-size: 16px; /* Розмір шрифту */
+}
+
+.training-card span {
+    font-size: 18px; /* Збільшуємо розмір шрифту для span */
+    font-weight: bold; /* Товсте шрифтування */
+}
+
+/* Стиль для контейнера тренувань */
+.trainings-container {
+    display: flex;
+    flex-direction: column; /* Вирівнюємо картки вертикально */
+    gap: 15px; /* Відстань між картками */
+}
+
+/* Стиль для інтервалів між тренуваннями */
+.trainings-container .training-card + .training-card {
+    margin-top: 15px;
+}
+
+button.cancelTraining-button {
+    background-color: var(--pink);
+    color: var(--white);
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}

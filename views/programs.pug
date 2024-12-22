@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    .main-content-programs
+        h1 НАШІ ПОСЛУГИ
+        each program, index in programs
+            .programs
+                if index % 2 === 0
+                    .program-container(style=`background-image: url('/images/img_programs/${program.id_program}.jpg'); justify-content: flex-start; text-align: left;`)
+                        .program-content
+                            h2= program.name
+                            p= program.description
+                else
+                    .program-container(style=`background-image: url('/images/img_programs/${program.id_program}.jpg'); justify-content: flex-end; text-align: right;`)
+                        .program-content
+                            h2= program.name
+                            p= program.description
+
+    footer
+        p © 2024 SweatFit. Всі права захищені.
+        p Designed by ODARKA-STUDIO

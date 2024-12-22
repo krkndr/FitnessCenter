@@ -1,0 +1,50 @@
+extends ../../layout
+
+block content
+    .edit-container
+        h1 Редагувати користувача
+        a(href="/adminpanel/adminpanel-users") Назад
+        form(action=`/users/edit/${user.id_user}` method="POST" id="edit-user-form")
+
+            .form-group-edit
+                label(for="role_id") Роль
+                select(id="role_id" name="role_id" required)
+                    each role in roles
+                        option(value=role.id_role, selected=role.id_role == user.role_id)= role.name
+
+            button(type="submit") Зберегти зміни
+
+
+
+    script.
+        document.getElementById('edit-user-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            const requestData = {};
+            formData.forEach((value, key) => {
+                requestData[key] = value;
+            });
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData),
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert('Користувача успішно оновлено!');
+                    window.location.href = '/adminpanel/adminpanel-users'; // Повернення до списку тренувань
+                } else {
+                    alert(`Помилка: ${result.message}`);
+                }
+            } catch (error) {
+                alert('Сталася помилка при з’єднанні з сервером.');
+                console.error('Error:', error);
+            }
+        });

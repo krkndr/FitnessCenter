@@ -1,0 +1,65 @@
+extends ../../layout
+
+block content
+    .create-container
+        h1 Створити нове тренування
+        a(href="/adminpanel/adminpanel-trainings") Назад
+        form(action="/trainings/create" method="POST" id="create-training-form")
+            .form-group-create
+                label(for="program_id") Програма:
+                select#program_id(name="program_id" required)
+                    each program in programs
+                        option(value=program.id_program)= program.name
+
+            .form-group-create
+                label(for="date") Дата:
+                input#date(type="date" name="date" required)
+
+            .form-group-create
+                label(for="time") Час:
+                input#time(type="time" name="time" required)
+
+            .form-group-create
+                label(for="trainer_id") Тренер:
+                select#trainer_id(name="trainer_id" required)
+                    each trainer in trainers
+                        option(value=trainer.id_trainer)= trainer.full_name
+
+            .form-group-create
+                label(for="quantity") Кількість:
+                input#quantity(type="number" name="quantity" min="1" required)
+
+            button(type="submit") Створити
+
+    script.
+        document.getElementById('create-training-form').addEventListener('submit', async (event) => {
+            event.preventDefault(); // Запобігаємо стандартному відправленню форми
+            const form = event.target;
+            const formData = new FormData(form);
+
+            const requestData = {};
+            formData.forEach((value, key) => {
+                requestData[key] = value;
+            });
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData),
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert('Тренування успішно створено!');
+                    window.location.href = '/adminpanel/adminpanel-trainings'; // Оновлюємо сторінку після успішного створення
+                } else {
+                    alert(`Помилка: ${result.message}`); // Виводимо текст помилки
+                }
+            } catch (error) {
+                alert('Сталася помилка при з’єднанні з сервером.');
+                console.error('Error:', error);
+            }
+        });

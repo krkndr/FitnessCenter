@@ -1,0 +1,55 @@
+extends ../../layout
+
+block content
+    .edit-container
+        h1 Редагування програми
+        a(href="/adminpanel/adminpanel-programs") Назад
+        form(action=`/programs/edit/${program.id_program}` method="POST" id="edit-program-form")
+            .form-group-edit
+                label(for="name") Назва програми
+                input(type="text" id="name" name="name" value=program.name required)
+
+            .form-group-edit
+                label(for="description") Опис програми
+                input(type="text" id="description" name="description" value=program.description required)
+
+            .form-group-edit
+                label(for="type") Тип програми
+                select(id="type" name="type" required)
+                    option(value="group" selected=program.type == "group") Групова
+                    option(value="individual" selected=program.type == "individual") Індивідуальна
+
+            button(type="submit") Зберегти зміни
+
+    script.
+        document.getElementById('edit-program-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            const requestData = {};
+            formData.forEach((value, key) => {
+                requestData[key] = value;
+            });
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData),
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert('Програму успішно оновлено!');
+                    window.location.href = '/adminpanel/adminpanel-programs'; // Повернення до списку тренувань
+                } else {
+                    alert(`Помилка: ${result.message}`);
+                }
+            } catch (error) {
+                alert('Сталася помилка при з’єднанні з сервером.');
+                console.error('Error:', error);
+            }
+        });

@@ -1,0 +1,104 @@
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    padding-top: 80px; /* Відступ для контенту під фіксований хедер */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--dark-gray);
+    position: fixed; /* Фіксує хедер зверху */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 1000;
+    padding: 0 20px; /* Відступи для контенту в хедері */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.header-logo {
+    height: 100%; /* Логотип займає всю висоту хедера */
+    object-fit: contain; /* Забезпечує правильне масштабування */
+    max-width: 300px; /* Додатково обмежує ширину */
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    height: 100%; /* Вирівнювання елементів за висотою хедера */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    height: 100%; /* Вирівнювання посилань за висотою хедера */
+}
+
+nav ul li {
+    display: flex;
+    align-items: center;
+    height: 100%; /* Елементи списку на всю висоту хедера */
+}
+
+/* Анімація для посилань у хедері */
+nav ul li a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 18px;
+    white-space: nowrap;
+    position: relative;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+
+    padding: 0 15px; /* Відступи для клікабельності */
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--pink);
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--pink);
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Стиль для кнопки входу/реєстрації */
+header button {
+    background-color: var(--pink);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0 40px; /* Відступи для клікабельності */
+    font-weight: bold;
+    height: 100%; /* Кнопка на всю висоту хедера */
+
+    white-space: nowrap;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+header button:hover {
+    background-color: var(--white);
+    color: var(--dark-gray);
+    transform: scale(1.05);
+}

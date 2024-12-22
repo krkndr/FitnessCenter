@@ -1,0 +1,68 @@
+.main-content-programs {
+    background: url('/images/programs-background.jpg') center/cover no-repeat;
+    margin: 0;
+    padding: 0;
+
+}
+
+.main-content-programs h1 {
+    font-family: 'Montserrat';
+    text-align: center;
+    font-size: 48px;
+    font-weight: bold;
+    color: var(--white);
+    margin-bottom: 40px;
+    padding-top: 40px;
+}
+
+.programs {
+    width: 80%;
+    margin: 0 auto; /* Центруємо контейнер на сторінці */
+    padding-bottom: 20px;
+}
+
+.program-container {
+    display: flex;
+    margin-top: 40px;
+    padding: 50px;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    border-radius: 15px; /* Заокруглюємо кути */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Тінь для контейнера */
+    transition: box-shadow 0.3s ease;
+
+
+}
+
+.program-container:hover {
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2); /* Посилена тінь при наведенні */
+}
+
+.program-content {
+    width: 50%;
+}
+
+.left-aligned {
+    display: flex;
+    text-align: left;
+    justify-content: flex-start; /* Центрує весь вміст на сторінці */
+}
+
+.right-aligned {
+    display: flex;
+
+
+    justify-content: flex-end; /* Центрує весь вміст на сторінці */
+}
+
+h2 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+}

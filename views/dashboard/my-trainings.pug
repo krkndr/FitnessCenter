@@ -1,0 +1,42 @@
+extends ../layout
+
+block content
+    .dashboard-container
+        // Sidebar
+        .sidebar
+            ul
+                li: a(href="/dashboard", class=(currentPage === 'dashboard' ? 'active' : ''))
+                    i(class="fas fa-user") Особисті дані
+                li: a(href="/dashboard/sing-up-training", class=(currentPage === 'sing-up-training' ? 'active' : ''))
+                    i(class="fas fa-dumbbell") Запис на тренування
+                li: a(href="/dashboard/my-trainings", class=(currentPage === 'my-trainings' ? 'active' : ''))
+                    i(class="fas fa-calendar-check") Мої тренування
+
+        .main-content-my-training
+            h1 МОЇ ТРЕНУВАННЯ
+
+            h2 Актуальні записи на тренування
+            if registeredTrainings.length > 0
+                .trainings-container
+                    each training in registeredTrainings
+                        .training-card.registered
+                            p Дата: <span>#{training.formattedDate}</span>
+                            p Час: <span>#{training.formattedTime}</span>
+                            p Вид: <span>#{training.program_name}</span>
+                            p Тренер: <span>#{training.trainer_name}</span>
+                            button.cancelTraining-button(onclick=`cancelTraining(${training.id_training})`) Відмінити
+
+            else
+                h3 Записи відсутні
+
+            h2 Відвідані тренування
+            if attendedTrainings.length > 0
+                .trainings-container
+                    each training in attendedTrainings
+                        .training-card.attended
+                            p Дата: <span>#{training.formattedDate}</span>
+                            p Час: <span>#{training.formattedTime}</span>
+                            p Вид: <span>#{training.program_name}</span>
+                            p Тренер: <span>#{training.trainer_name}</span>
+            else
+                h3 Немає відвіданих тренувань

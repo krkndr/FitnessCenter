@@ -1,0 +1,110 @@
+
+.main-content-prices{
+    background: linear-gradient(
+            to left,
+            rgba(255, 0, 110, 0.4), /* Рожевий зліва */
+            rgba(255, 0, 110, 0) /* Прозорість справа */
+    ),
+    url('/images/programs-background.jpg') center/cover no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    overflow: auto;
+    height: 750px;
+    text-align: center;
+    padding: 0;
+}
+
+.main-content-prices h1 {
+    font-family: 'Montserrat';
+    text-align: center;
+    font-size: 48px;
+    font-weight: bold;
+    color: var(--white);
+}
+
+.price-card h1{
+    color: var(--pink);
+}
+.price-cards {
+    display: flex;
+    justify-content: center;
+
+    gap: 40px;
+}
+
+.price-card {
+    /*background-color: var(--dark-gray);*/
+    background: url('/images/membership-back.jpg') center/cover no-repeat;
+
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    height: 400px;
+    text-align: center;
+    box-shadow: 2px 2px 30px var(--dark-gray);
+
+    display: flex; /* Вмикаємо flexbox */
+    flex-direction: column; /* Встановлюємо вертикальне розташування */
+    justify-content: space-between; /* Рівномірно розподіляємо простір між елементами */
+    align-items: center; /* Вирівнюємо елементи по центру */
+}
+
+.price-card h2 {
+    font-size: 24px;
+    color: var(--white);
+    margin: 0; /* Забираємо зайві відступи */
+    padding-top: 40px;
+}
+
+.price-card p {
+    font-size: 22px;
+    color: var(--white);
+    margin: 0; /* Забираємо зайві відступи */
+}
+
+.price-card .btn {
+    display: inline-block;
+    background-color: var(--pink);
+    color: var(--white);
+    padding: 10px 20px;
+    margin-bottom: 40px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+
+.price-card .btn:hover {
+    background-color: var(--white);
+    color: var(--dark-gray);
+}
+
+.price-card ul {
+    list-style: none; /* Видаляємо стандартні маркери списків */
+    padding: 0;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.price-card ul li {
+    font-size: 18px;
+    color: var(--white);
+    padding: 5px 0;
+    position: relative; /* Додаємо відносне позиціонування для роботи з псевдоелементом */
+    padding-left: 25px; /* Відступ для тексту, щоб маркер не накладався */
+}
+
+.price-card ul li::before {
+    content: "✔"; /* Додаємо маркер перед пунктами */
+    color: var(--pink);
+    font-weight: bold;
+    position: absolute;
+    left: 0; /* Розміщуємо маркер на початку елемента */
+    top: 0; /* Вирівнюємо маркер по вертикалі з текстом */
+}
+
+.price-card ul {
+    padding-left: 25px; /* Зміщення для тексту списку */
+}
+

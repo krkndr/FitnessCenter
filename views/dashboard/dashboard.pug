@@ -1,0 +1,89 @@
+extends ../layout
+
+block content
+    .dashboard-container
+        .sidebar
+            ul
+                li: a(href="/dashboard", class=(currentPage === 'dashboard' ? 'active' : ''))
+                    i(class="fas fa-user") Особисті дані
+                li: a(href="/dashboard/sing-up-training", class=(currentPage === 'sing-up-training' ? 'active' : ''))
+                    i(class="fas fa-dumbbell") Запис на тренування
+                li: a(href="/dashboard/my-trainings", class=(currentPage === 'my-trainings' ? 'active' : ''))
+                    i(class="fas fa-calendar-check") Мої тренування
+
+        .main-content
+            h2 Особистий кабінет
+            .personal-info
+                p Ім'я Прізвище: <span>#{user.name_surname}</span>
+                p Логін: <span>#{user.login}</span>
+                p Пошта: <span>#{user.email}</span>
+                p Телефон: <span>#{user.phone}</span>
+            button.edit-data(onclick="window.toggleUserEditForm()") Змінити дані
+            button.edit-data(onclick="window.toggleChangePasswordForm()") Змінити пароль
+
+            .user-edit-form-container#userEditFormContainer(style="display: none;")
+                .user-edit-form
+                    .form-header
+                        h3 РЕДАГУВАТИ ДАНІ
+                        button.close-button(type="button", onclick="window.toggleUserEditForm()") ✖
+                    form(action=`/users/editUser` method="POST" class="edit-user-form-dashboard")
+                        input(type="text" id="name_surname" name="name_surname" value=user.name_surname required)
+                        input(type="text" id="login" name="login" value=user.login required)
+                        input(type="email" id="email" name="email" value=user.email required)
+                        input(type="text" id="phone" name="phone" value=user.phone required)
+                        button(type="submit" class="btn-edit") Зберегти зміни
+
+            .change-password-form-container#changePasswordFormContainer(style="display: none;")
+                .change-password-form
+                    .form-header
+                        h3 ЗМІНА ПАРОЛЮ
+                        button.close-button(type="button", onclick="window.toggleChangePasswordForm()") ✖
+                    form(action=`/users/changePassword` method="POST" class="change-password-form")
+                        input(type="password" name="currentPassword" placeholder="Введіть поточний пароль" required)
+                        input(type="password" name="newPassword" placeholder="Введіть новий пароль" required)
+                        input(type="password" name="newConfirmPassword" placeholder="Повторіть новий пароль" required)
+                        button(type="submit" class="btn-change") Змінити пароль
+
+            .subscription-info
+                h3 Поточний абонемент
+                .subscription-card
+                    if membership
+                        p Тип: <span>#{membership.membership_name}</span>
+                        p Дата закінчення: <span>#{membership.end_date}</span>
+                    else
+                        p Немає активного абонемента
+                        button.buyMembership-button(onclick="toggleMembershipForm()") Купити
+
+            .membership-form-container#membershipFormContainer(style="display: none;")
+                .membership-form
+                    .form-header
+                        h3 ПРИДБАТИ АБОНЕМЕНТ
+                        button.close-button(type="button", onclick="toggleMembershipForm()") ✖
+
+                    a(href="/prices") Ознайомитись з абонементами
+                    form(action="/users/buy-membership" method="POST", class="membership-form")
+                        label(for="membership-type") Тип абонемента:
+                        select#membership-type(name="membershipId" required)
+                            each membership in memberships
+                                option(value=membership.id_membership) #{membership.name}
+
+                        label() Спосіб оплати:
+                        .payment-methods
+                            div.payment-option
+                                input(type="radio", id="credit-card", name="paymentMethod", value="credit-card")
+                                label(for="credit-card")
+                                    img(src="/images/credit-card-icon.png", alt="Платіжні картки")
+                                    | Платіжні картки
+                            div.payment-option
+                                input(type="radio", id="privat-pay", name="paymentMethod", value="privat-pay")
+                                label(for="privat-pay")
+                                    img(src="/images/privat-pay-icon.png", alt="Privat Pay")
+                                    | Privat Pay
+                            div.payment-option
+                                input(type="radio", id="google-pay", name="paymentMethod", value="google-pay")
+                                label(for="google-pay")
+                                    img(src="/images/google-pay-icon.png", alt="Google Pay")
+                                    | Google Pay
+
+                        button(type="submit", class="buy-button") Купити
+

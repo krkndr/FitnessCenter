@@ -1,0 +1,122 @@
+.main-content-schedule {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url('/images/programs-background.jpg') center/cover no-repeat;
+}
+.main-content-schedule p{
+    color: var(--white);
+    text-align: center;
+    font-size: 18px;
+    padding-left: 20px;
+}
+.main-content-schedule h1 {
+    font-family: 'Montserrat';
+    text-align: center;
+    font-size: 48px;
+    font-weight: bold;
+    color: var(--white);
+    margin-bottom: 40px;
+    padding-top: 40px;
+}
+
+.schedule-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.schedule-navigation h2{
+    color: var(--white);
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.table-schedule-container {
+    display: flex;
+    justify-content: center; /* Горизонтальне вирівнювання */
+    align-items: center; /* Вертикальне вирівнювання */
+    min-height: 50vh; /* Висота контейнера, щоб таблиця була вертикально по центру */
+    padding: 20px 40px;
+}
+
+
+.main-content-schedule a {
+    font-size: 35px;
+    color: var(--pink); /* Колір для посилань */
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.main-content-schedule a:hover {
+    background-color: var(--pink);
+    color: white;
+}
+
+.table-schedule-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table-schedule-container table th, table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.table-schedule-container table th {
+    background-color: var(--pink);
+    color: white;
+    font-weight: bold;
+}
+
+.table-schedule-container table td {
+    vertical-align: top;
+}
+
+.table-schedule-container table td p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.table-schedule-container table td p strong {
+    font-size: 18px;
+    color: var(--pink);
+}
+
+.table-schedule-container table td br {
+    margin-top: 5px;
+}
+
+
+.table-schedule-container p {
+    text-align: center;
+    color: var(--dark-gray);
+    font-size: 18px;
+}
+
+
+td.td-hour{
+    background-color: rgba(255, 0, 110, 1);
+    color: var(--white);
+    font-size: 20px;
+    font-weight: bold;
+}
+/* Підсвічування стовпця для поточного дня */
+td.today-column {
+    background-color: rgba(255, 217, 233, 0.8);
+}
+
+/* Підсвічування стовпця для минулих днів */
+td.past-column {
+    background-color: rgba(167, 162, 164, 0.8);
+}
+

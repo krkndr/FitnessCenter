@@ -1,0 +1,66 @@
+extends ../../layout
+
+block content
+    .edit-container
+        h1 Редагувати тренування
+        a(href="/adminpanel/adminpanel-trainings") Назад
+        form(action=`/trainings/edit/${training.id_training}` method="POST" id="edit-training-form")
+            .form-group-edit
+                label(for="program_id") Програма:
+                select#program_id(name="program_id" required)
+                    each program in programs
+                        option(value=program.id_program selected=(program.id_program == training.program_id))= program.name
+
+            .form-group-edit
+                label(for="date") Дата:
+                input#date(type="date" name="date" value=training.date required)
+
+            .form-group-edit
+                label(for="time") Час:
+                input#time(type="time" name="time" value=training.time required)
+
+            .form-group-edit
+                label(for="trainer_id") Тренер:
+                select#trainer_id(name="trainer_id" required)
+                    each trainer in trainers
+                        option(value=trainer.id_trainer selected=(trainer.id_trainer == training.trainer_id))= trainer.full_name
+
+            .form-group-edit
+                label(for="quantity") Кількість:
+                input#quantity(type="number" name="quantity" value=training.quantity min="1" required)
+
+            button(type="submit") Зберегти
+
+    script.
+        document.getElementById('edit-training-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            const requestData = {};
+            formData.forEach((value, key) => {
+                requestData[key] = value;
+            });
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData),
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert('Тренування успішно оновлено!');
+                    window.location.href = '/adminpanel/adminpanel-trainings'; // Повернення до списку тренувань
+                } else {
+                    alert(`Помилка: ${result.message}`);
+                }
+            } catch (error) {
+                alert('Сталася помилка при з’єднанні з сервером.');
+                console.error('Error:', error);
+            }
+        });
+

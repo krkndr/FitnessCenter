@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    .main-content-team
+        h1 НАША КОМАНДА
+        .trainers-container
+            each trainer in trainers
+                .trainer-container
+                    .trainer-photo
+                        img(src=`/images/img_team/${trainer.id_trainer}.jpg`, alt=trainer.name)
+                    .trainer-info
+                        h2= trainer.full_name
+                        p= trainer.description
+
+    footer
+        p © 2024 SweatFit. Всі права захищені.
+        p Designed by ODARKA-STUDIO

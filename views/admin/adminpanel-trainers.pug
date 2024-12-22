@@ -1,0 +1,41 @@
+extends ../layout
+
+block content
+    .adminpanel-container
+        .admin-sidebar
+            ul
+                li: a(href="/adminpanel/") Головна
+                li: a(href="/adminpanel/adminpanel-trainings") Тренування
+                li: a(href="/adminpanel/adminpanel-users") Користувачі
+                li: a(href="/adminpanel/adminpanel-trainers") Тренери
+                li: a(href="/adminpanel/adminpanel-programs") Програми
+                li: a(href="/adminpanel/adminpanel-memberships") Абонементи
+        .adminpanel-content
+            h1 Список тренерів
+            a(href="/trainers/create" class="btn btn-primary") + Додати тренера
+            table.table.table-bordered.table-striped
+                thead
+                    tr
+                        th ID
+                        th Повне ім'я
+                        th Дата народження
+                        th Телефон
+                        th Дата прийому
+                        th Програма
+                        th Опис
+                        th Дії
+                tbody
+                    each trainer in trainers
+                        tr
+                            td= trainer.id_trainer
+                            td= trainer.full_name
+                            td= trainer.date_of_birth
+                            td= trainer.phone
+                            td= trainer.date_of_employment
+                            td= trainer.program_name || 'Не призначено'
+                            td= trainer.description
+                            td
+                                .actions
+                                    a(href=`/trainers/edit/${trainer.id_trainer}`) Редагувати
+                                    button(data-id=trainer.id_trainer class="delete-trainer-btn") Видалити
+
